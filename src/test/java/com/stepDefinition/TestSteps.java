@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -44,11 +45,43 @@ public class TestSteps {
 		driver.findElement(By.name("password")).sendKeys("vasu1234");
 		System.out.println("Inside password Method");
 	}
+		
+		
+		@When("User enters username and password")
+		public void user_enters_username_and_password(DataTable dataTable) throws InterruptedException {
+		   
+			//Directly accessing by index
+		  //  List<List<String>> userValues=dataTable.cells();
+//			WebElement uname=driver.findElement(By.id("username"));
+//			uname.clear();
+//			uname.sendKeys(userValues.get(0).get(0));
+//			Thread.sleep(5000);
+//			driver.findElement(By.name("password")).clear();
+//	    	driver.findElement(By.name("password")).sendKeys(userValues.get(0).get(1));
+			
+			//accessing value by giving key in map
+			for(Map<String,String> userValues:dataTable.asMaps(String.class,String.class)) {
+			
+		   
+		    	WebElement uname=driver.findElement(By.id("username"));
+				uname.clear();
+				uname.sendKeys(userValues.get("username"));
+				Thread.sleep(5000);
+				driver.findElement(By.name("password")).clear();
+		    	driver.findElement(By.name("password")).sendKeys(userValues.get("password"));
+			}
+		  
+		    
+		}
+
+
+
+	
 	@When("user clicks on login button")
 	public void user_clicks_on_login_button() {
 	    // Write code here that turns the phrase above into concrete actions
 		driver.findElement(By.className("login_button")).click();
-		System.out.println("Inside login Method");
+		System.out.println("Inside login Method"); 
 	}
 //	@Then("Login is Successfull")
 //	public void login_is_successfull() {

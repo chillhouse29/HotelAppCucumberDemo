@@ -11,7 +11,7 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features="Features/OutlineDemo.feature",
+		features="Features/DataTable.feature",
 		glue={"com.stepDefinition"},
 		//plugin={"pretty","html:test-output","json:json_output/cucumber.json"},
 		//monochrome=true,
